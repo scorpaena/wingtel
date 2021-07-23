@@ -8,5 +8,6 @@ class PlanViewSet(viewsets.ReadOnlyModelViewSet):
     """
     A viewset that provides `retrieve`, `create`, and `list` actions.
     """
+
     queryset = Plan.objects.all()
     serializer_class = PlanSerializer

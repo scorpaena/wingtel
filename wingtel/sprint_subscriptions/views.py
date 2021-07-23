@@ -8,5 +8,6 @@ class SprintSubscriptionViewSet(viewsets.ModelViewSet):
     """
     A viewset that provides `retrieve`, `create`, and `list` actions.
     """
+
     queryset = SprintSubscription.objects.all()
     serializer_class = SprintSubscriptionSerializer

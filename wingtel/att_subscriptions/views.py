@@ -9,5 +9,6 @@ class ATTSubscriptionViewSet(viewsets.ModelViewSet):
     """
     A viewset that provides `retrieve`, `create`, and `list` actions.
     """
+
     queryset = ATTSubscription.objects.all()
     serializer_class = ATTSubscriptionSerializer

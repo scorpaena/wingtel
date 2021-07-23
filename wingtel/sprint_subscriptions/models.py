@@ -10,14 +10,15 @@ from wingtel.plans.models import Plan
 
 class SprintSubscription(models.Model):
     """Represents a subscription with Sprint for a user and a single device"""
+
     STATUS = Choices(
-        ('new', 'New'),
-        ('active', 'Active'),
-        ('suspended', 'Suspended'),
-        ('expired', 'Expired'),
+        ("new", "New"),
+        ("active", "Active"),
+        ("suspended", "Suspended"),
+        ("expired", "Expired"),
     )
-    ONE_KILOBYTE_PRICE = Decimal('0.0015')
-    ONE_SECOND_PRICE = Decimal('0.0015')
+    ONE_KILOBYTE_PRICE = Decimal("0.0015")
+    ONE_SECOND_PRICE = Decimal("0.0015")
 
     # Owning user
     user = models.ForeignKey(User, on_delete=models.PROTECT)
@@ -25,9 +26,9 @@ class SprintSubscription(models.Model):
     plan = models.ForeignKey(Plan, null=True, on_delete=models.PROTECT)
     status = models.CharField(max_length=10, choices=STATUS, default=STATUS.new)
 
-    device_id = models.CharField(max_length=20, blank=True, default='')
-    phone_number = models.CharField(max_length=20, blank=True, default='')
-    phone_model = models.CharField(max_length=128, blank=True, default='')
+    device_id = models.CharField(max_length=20, blank=True, default="")
+    phone_number = models.CharField(max_length=20, blank=True, default="")
+    phone_model = models.CharField(max_length=128, blank=True, default="")
 
     sprint_id = models.CharField(max_length=16, null=True)
 

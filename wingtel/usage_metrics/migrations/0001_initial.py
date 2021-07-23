@@ -7,23 +7,36 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='UsageMetrics',
+            name="UsageMetrics",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateField()),
-                ('kilobytes_price', models.DecimalField(decimal_places=2, default=0, max_digits=5)),
-                ('kilobytes_used', models.IntegerField()),
-                ('seconds_price', models.DecimalField(decimal_places=2, default=0, max_digits=5)),
-                ('seconds_used', models.IntegerField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date", models.DateField()),
+                (
+                    "kilobytes_price",
+                    models.DecimalField(decimal_places=2, default=0, max_digits=5),
+                ),
+                ("kilobytes_used", models.IntegerField()),
+                (
+                    "seconds_price",
+                    models.DecimalField(decimal_places=2, default=0, max_digits=5),
+                ),
+                ("seconds_used", models.IntegerField()),
             ],
             options={
-                'db_table': 'usage_metrics',
-                'managed': False,
+                "db_table": "usage_metrics",
+                "managed": False,
             },
         ),
     ]

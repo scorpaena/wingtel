@@ -3,7 +3,6 @@ from wingtel.sprint_subscriptions.models import SprintSubscription
 
 
 class SprintSubscriptionSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = SprintSubscription
-        fields = '__all__'
+        fields = "__all__"

@@ -5,19 +5,20 @@ from django.db import models
 
 class Purchase(models.Model):
     """Represents a purchase for a user and their subscription(s)"""
+
     STATUS = Choices(
-        ('pending', 'Pending'),
-        ('overdue', 'Past Due'),
-        ('complete', 'Complete'),
-        ('cancelled', 'Cancelled'),
+        ("pending", "Pending"),
+        ("overdue", "Past Due"),
+        ("complete", "Complete"),
+        ("cancelled", "Cancelled"),
     )
 
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     sprint_sub = models.ForeignKey(
-        'sprint_subscriptions.SprintSubscription', null=True, on_delete=models.PROTECT
+        "sprint_subscriptions.SprintSubscription", null=True, on_delete=models.PROTECT
     )
     att_sub = models.ForeignKey(
-        'att_subscriptions.ATTSubscription', null=True, on_delete=models.PROTECT
+        "att_subscriptions.ATTSubscription", null=True, on_delete=models.PROTECT
     )
     status = models.CharField(max_length=20, choices=STATUS, default=STATUS.pending)
     amount = models.DecimalField(max_digits=8, decimal_places=2)

@@ -11,23 +11,63 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('att_subscriptions', '0001_initial'),
-        ('sprint_subscriptions', '0001_initial'),
+        ("att_subscriptions", "0001_initial"),
+        ("sprint_subscriptions", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Purchase',
+            name="Purchase",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('status', models.CharField(choices=[('pending', 'Pending'), ('overdue', 'Past Due'), ('complete', 'Complete'), ('cancelled', 'Cancelled')], default='pending', max_length=20)),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=8)),
-                ('payment_date', models.DateTimeField(db_index=True, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('att_sub', models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='att_subscriptions.ATTSubscription')),
-                ('sprint_sub', models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='sprint_subscriptions.SprintSubscription')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("pending", "Pending"),
+                            ("overdue", "Past Due"),
+                            ("complete", "Complete"),
+                            ("cancelled", "Cancelled"),
+                        ],
+                        default="pending",
+                        max_length=20,
+                    ),
+                ),
+                ("amount", models.DecimalField(decimal_places=2, max_digits=8)),
+                ("payment_date", models.DateTimeField(db_index=True, null=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "att_sub",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="att_subscriptions.ATTSubscription",
+                    ),
+                ),
+                (
+                    "sprint_sub",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="sprint_subscriptions.SprintSubscription",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
