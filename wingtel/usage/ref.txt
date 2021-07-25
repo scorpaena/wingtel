@@ -1,0 +1,14 @@
+    operations = [
+        # migrations.RunSQL(
+        #     'CREATE VIEW union_data_id_fields AS SELECT DATE(usage_date) AS date, subscription_id FROM usage_datausagerecord GROUP BY DATE(usage_date), subscription_id UNION SELECT DATE(usage_date) AS date, subscription_id FROM usage_voiceusagerecord GROUP BY DATE(usage_date), subscription_id ORDER BY date;'
+        #     # run_sql_query_file(query_file="union_data_id_fields.sql")
+        # ),
+        # migrations.RunSQL(
+        #     run_sql_query_file(query_file="usage_metrics_joins.sql")
+        # ),
+
+
+def run_sql_query_file(query_file):
+    with open(query_file) as file:
+        query = file.read()
+    return query

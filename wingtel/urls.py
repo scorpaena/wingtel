@@ -8,12 +8,12 @@ from wingtel.att_subscriptions.views import ATTSubscriptionViewSet
 from wingtel.plans.views import PlanViewSet
 from wingtel.purchases.views import PurchaseViewSet
 from wingtel.sprint_subscriptions.views import SprintSubscriptionViewSet
-from wingtel.usage_metrics.views import (
+from wingtel.usage.views import (
     UsageMetricsView,
     UsageMetricsPriceLimitView,
     UsageMetricsByIdAndTypeView,
 )
-from wingtel.usage_metrics.dateconverter import YearMonthDayConverter
+from wingtel.usage.dateconverter import YearMonthDayConverter
 
 
 router = routers.DefaultRouter()
