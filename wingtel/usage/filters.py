@@ -1,26 +1,46 @@
-import django_filters as filters
+from django_filters import rest_framework as filters
+from django.db.models import Q, Sum
 from .models import UsageMetrics
+
 
 class UsageMetricsPriceLimitFilter(filters.FilterSet):
 
-    price_limit = filters.NumberFilter(name='kilobytes_price', lookup_type='gte')
+    price = filters.NumberFilter(field_name='price', method='price_limit')
+
+    def price_limit(self, queryset, name, value):
+        return queryset.filter(
+            Q(kilobytes_price__gte=value) | Q(seconds_price__gte=value)
+        )
 
     class Meta:
         model = UsageMetrics
         fields = [
-            'kilobytes_price',
-            'seconds_price',
-            'price_limit',
+            'price',
         ]
-        # fields = {
-        #     'kilobytes_price': ['gte',],
-        #     'seconds_price': ['gte',],
-        # }
 
-    # id = models.BigIntegerField(primary_key=True)
-    # date = models.DateField(null=False)
-    # subscription = models.ForeignKey(SprintSubscription, on_delete=models.DO_NOTHING)
-    # kilobytes_price = models.DecimalField(decimal_places=2, max_digits=8, default=0)
-    # kilobytes_used = models.IntegerField(null=False)
-    # seconds_price = models.DecimalField(decimal_places=2, max_digits=8, default=0)
-    # seconds_used = models.IntegerField(null=False)
+
+class UsageMetricsByIdAndTypeFilter(filters.FilterSet):
+
+    usage_type = filters.CharFilter(field_name='usage_type', method='by_usage_type')
+    date_from = filters.DateFilter(field_name='date', lookup_expr='gte')
+    date_to = filters.DateFilter(field_name='date', lookup_expr='lt')
+
+    def by_usage_type(self, queryset, name, value):
+        if value == "data":
+            return queryset.values("subscription_id").annotate(
+                kilobytes_total_price=Sum("kilobytes_price")
+            )
+        elif value == "voice":
+            return queryset.values("subscription_id").annotate(
+                seconds_total_price=Sum("seconds_price")
+            )
+        else:
+            return queryset
+    
+    class Meta:
+        model = UsageMetrics
+        fields = [
+            'usage_type',
+            'date_from',
+            'date_to'
+        ]

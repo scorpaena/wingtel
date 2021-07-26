@@ -31,6 +31,9 @@ class UsageMetricsPriceLimitSerializer(serializers.ModelSerializer):
             "seconds_price",
             "exceeds_seconds_price_by",
         ]
+    
+    def get_price_from_url(self):
+        return int(self.context["request"].GET["price"])
 
     def get_exceeds_kilobytes_price_by(self, obj):
         try:
@@ -45,9 +48,6 @@ class UsageMetricsPriceLimitSerializer(serializers.ModelSerializer):
         except TypeError:
             return None
         return price_delta
-
-    def get_price_from_url(self):
-        return self.context["view"].kwargs["price"]
 
 
 class UsageDataMetricsByPeriodSerializer(serializers.ModelSerializer):

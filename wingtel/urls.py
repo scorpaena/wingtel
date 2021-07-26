@@ -13,7 +13,6 @@ from wingtel.usage.views import (
     UsageMetricsPriceLimitView,
     UsageMetricsByIdAndTypeView,
 )
-from wingtel.usage.dateconverter import YearMonthDayConverter
 
 
 router = routers.DefaultRouter()
@@ -27,12 +26,12 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("usage_metrics/", UsageMetricsView.as_view(), name="usage_metrics"),
     path(
-        "usage_metrics/price_limit=<int:price>",
+        "usage_metrics/price_limit/",
         UsageMetricsPriceLimitView.as_view(),
         name="price_limit",
     ),
     path(
-        "usage_metrics/usage_type=<usage_type>&date_from=<yyyy-mm-dd:date_from>&date_to=<yyyy-mm-dd:date_to>",
+        "usage_metrics/by_usage_type/",
         UsageMetricsByIdAndTypeView.as_view(),
         name="usage_type_by_date",
     ),
