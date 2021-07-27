@@ -31,7 +31,7 @@ class UsageMetricsPriceLimitSerializer(serializers.ModelSerializer):
             "seconds_price",
             "exceeds_seconds_price_by",
         ]
-    
+
     def get_price_from_url(self):
         return int(self.context["request"].GET["price"])
 

@@ -5,7 +5,7 @@ from .models import UsageMetrics
 
 class UsageMetricsPriceLimitFilter(filters.FilterSet):
 
-    price = filters.NumberFilter(field_name='price', method='price_limit')
+    price = filters.NumberFilter(field_name="price", method="price_limit")
 
     def price_limit(self, queryset, name, value):
         return queryset.filter(
@@ -15,15 +15,15 @@ class UsageMetricsPriceLimitFilter(filters.FilterSet):
     class Meta:
         model = UsageMetrics
         fields = [
-            'price',
+            "price",
         ]
 
 
 class UsageMetricsByIdAndTypeFilter(filters.FilterSet):
 
-    usage_type = filters.CharFilter(field_name='usage_type', method='by_usage_type')
-    date_from = filters.DateFilter(field_name='date', lookup_expr='gte')
-    date_to = filters.DateFilter(field_name='date', lookup_expr='lt')
+    usage_type = filters.CharFilter(field_name="usage_type", method="by_usage_type")
+    date_from = filters.DateFilter(field_name="date", lookup_expr="gte")
+    date_to = filters.DateFilter(field_name="date", lookup_expr="lt")
 
     def by_usage_type(self, queryset, name, value):
         if value == "data":
@@ -36,11 +36,7 @@ class UsageMetricsByIdAndTypeFilter(filters.FilterSet):
             )
         else:
             return queryset
-    
+
     class Meta:
         model = UsageMetrics
-        fields = [
-            'usage_type',
-            'date_from',
-            'date_to'
-        ]
+        fields = ["usage_type", "date_from", "date_to"]

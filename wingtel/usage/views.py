@@ -7,10 +7,7 @@ from .serializers import (
     UsageDataMetricsByPeriodSerializer,
     UsageVoiceMetricsByPeriodSerializer,
 )
-from .filters import (
-    UsageMetricsPriceLimitFilter,
-    UsageMetricsByIdAndTypeFilter
-)
+from .filters import UsageMetricsPriceLimitFilter, UsageMetricsByIdAndTypeFilter
 
 
 class UsageMetricsView(generics.ListAPIView):
@@ -27,7 +24,7 @@ class UsageMetricsPriceLimitView(generics.ListAPIView):
 class UsageMetricsByIdAndTypeView(generics.ListAPIView):
     queryset = UsageMetrics.objects.all()
     filterset_class = UsageMetricsByIdAndTypeFilter
-    
+
     def get_usage_type(self):
         return self.request.GET["usage_type"]
 

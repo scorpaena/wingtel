@@ -15,49 +15,87 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('sprint_subscriptions', '0001_initial'),
+        ("sprint_subscriptions", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='UsageMetrics',
+            name="UsageMetrics",
             fields=[
-                ('id', models.BigIntegerField(primary_key=True, serialize=False)),
-                ('date', models.DateField()),
-                ('kilobytes_price', models.DecimalField(decimal_places=2, default=0, max_digits=8)),
-                ('kilobytes_used', models.IntegerField()),
-                ('seconds_price', models.DecimalField(decimal_places=2, default=0, max_digits=8)),
-                ('seconds_used', models.IntegerField()),
+                ("id", models.BigIntegerField(primary_key=True, serialize=False)),
+                ("date", models.DateField()),
+                (
+                    "kilobytes_price",
+                    models.DecimalField(decimal_places=2, default=0, max_digits=8),
+                ),
+                ("kilobytes_used", models.IntegerField()),
+                (
+                    "seconds_price",
+                    models.DecimalField(decimal_places=2, default=0, max_digits=8),
+                ),
+                ("seconds_used", models.IntegerField()),
             ],
             options={
-                'db_table': 'usage_metrics',
-                'managed': False,
+                "db_table": "usage_metrics",
+                "managed": False,
             },
         ),
         migrations.CreateModel(
-            name='VoiceUsageRecord',
+            name="VoiceUsageRecord",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('price', models.DecimalField(decimal_places=2, default=0, max_digits=5)),
-                ('usage_date', models.DateTimeField()),
-                ('seconds_used', models.IntegerField()),
-                ('subscription', models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='sprint_subscriptions.SprintSubscription')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "price",
+                    models.DecimalField(decimal_places=2, default=0, max_digits=5),
+                ),
+                ("usage_date", models.DateTimeField()),
+                ("seconds_used", models.IntegerField()),
+                (
+                    "subscription",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="sprint_subscriptions.SprintSubscription",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='DataUsageRecord',
+            name="DataUsageRecord",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('price', models.DecimalField(decimal_places=2, default=0, max_digits=5)),
-                ('usage_date', models.DateTimeField()),
-                ('kilobytes_used', models.IntegerField()),
-                ('subscription', models.ForeignKey(null=True, on_delete=django.db.models.deletion.PROTECT, to='sprint_subscriptions.SprintSubscription')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "price",
+                    models.DecimalField(decimal_places=2, default=0, max_digits=5),
+                ),
+                ("usage_date", models.DateTimeField()),
+                ("kilobytes_used", models.IntegerField()),
+                (
+                    "subscription",
+                    models.ForeignKey(
+                        null=True,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="sprint_subscriptions.SprintSubscription",
+                    ),
+                ),
             ],
         ),
-        migrations.RunSQL(
-            run_sql_query_file(query_file="union_data_id_fields.sql")
-        ),
-        migrations.RunSQL(
-            run_sql_query_file(query_file="usage_metrics_joins.sql")
-        ),
+        migrations.RunSQL(run_sql_query_file(query_file="union_data_id_fields.sql")),
+        migrations.RunSQL(run_sql_query_file(query_file="usage_metrics_joins.sql")),
     ]
