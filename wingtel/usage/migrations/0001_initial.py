@@ -4,12 +4,6 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 
-def run_sql_query_file(query_file):
-    with open(query_file) as file:
-        query = file.read()
-    return query
-
-
 class Migration(migrations.Migration):
 
     initial = True
@@ -96,6 +90,4 @@ class Migration(migrations.Migration):
                 ),
             ],
         ),
-        migrations.RunSQL(run_sql_query_file(query_file="union_data_id_fields.sql")),
-        migrations.RunSQL(run_sql_query_file(query_file="usage_metrics_joins.sql")),
     ]
